@@ -1,9 +1,15 @@
 package day1;
 
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 import static org.junit.jupiter.api.Assertions.*;
+
+
+
+// Setting display name of the test class in test result using @DisplayName
+@DisplayName("Day 1 of Junit5 Tests")
 public class JUnit5_Intro {
 
+    @DisplayName("Testing Numbers")
     @Test
     public void test(){
         System.out.println("Learning JUnit5");
@@ -14,6 +20,7 @@ public class JUnit5_Intro {
 
     //add one more test, pass, fail
     //assert your name starts with 'A'
+    @DisplayName("First initial test")
     @Test
     public void checkInitialLetter(){
         String str = "AOmer";
