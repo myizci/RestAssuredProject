@@ -9,5 +9,22 @@ public class JUnit5_Intro {
         System.out.println("Learning JUnit5");
 
         assertEquals(1,1,"Something is wrong");
+        assertEquals(1,2,"Something is wrong");
     }
+
+    //add one more test, pass, fail
+    //assert your name starts with 'A'
+    @Test
+    public void checkInitialLetter(){
+        String str = "AOmer";
+
+       // assertEquals(str.startsWith("A"),true);
+        assertTrue(str.startsWith("A"));
+    }
+
+
+
+
+
+
 }
