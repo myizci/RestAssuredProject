@@ -26,19 +26,24 @@ public class SpartanJsonPath extends SpartanNoAuthBaseTest {
                 given()
                         .log().all()
                         .pathParam("id", 10)
-                        .when().get("/spartans/{id}")
+
+                        .when()
+
+                        .get("/spartans/{id}")
                         .prettyPeek();
 
-        int myId = response.path("id");
+        int myId = response.path("id"); //how to get id
         System.out.println("myId = " + myId);
 
         JsonPath jsonPath = response.jsonPath();
 
-        int myId1 = jsonPath.getInt("id");
+        int myId1 = jsonPath.getInt("id"); //how to get id
         System.out.println("jsonPath.getInt(\"id\") = " + myId1);
 
         long myPhoneNumber = jsonPath.getLong("phone");
         System.out.println("myPhoneNumber = " + myPhoneNumber);
+
+
         System.out.println("Save the json object as a Map Object: " + jsonPath.getMap(""));
 
         Map<String, Object> resultJsonInMap = jsonPath.getMap("");
@@ -56,6 +61,8 @@ public class SpartanJsonPath extends SpartanNoAuthBaseTest {
 
         JsonPath jp = get("/spartans").jsonPath();
 
+       // jp.prettyPrint();
+
         // print the first the id in the json array
 
         System.out.println("jp.getInt(\"id[0]\") = " + jp.getInt("id[0]"));
@@ -68,7 +75,7 @@ public class SpartanJsonPath extends SpartanNoAuthBaseTest {
     }
 
 
-    @DisplayName("Extract data from Fet /spartans/search")
+    @DisplayName("Extract data from GET /spartans/search")
     @Test
     public void testGetSearchSpartans() {
 
@@ -80,7 +87,8 @@ public class SpartanJsonPath extends SpartanNoAuthBaseTest {
                         .queryParam("gender", "Female")
                         .log().all()
 
-                        .when().get("/spartans/search")
+                        .when().
+                         get("/spartans/search")
                         .prettyPeek()
                         .jsonPath();
 
@@ -104,7 +112,8 @@ public class SpartanJsonPath extends SpartanNoAuthBaseTest {
     public void testSavingJsonArrayFieldsIntoList() {
 
         JsonPath jp =
-                given().queryParam("nameContains", "J")
+                given()
+                        .queryParam("nameContains", "J")
                         .queryParam("gender", "Male")
                         .log().all()
                         .when()
@@ -132,20 +141,21 @@ public class SpartanJsonPath extends SpartanNoAuthBaseTest {
     }
 
 
-    @DisplayName("Get List Practice foer GET /spartans")
+    @DisplayName("Get List Practice for GET /spartans")
     @Test
     public void testGetListOutOfAllSpartans() {
 
         JsonPath jp = get("/spartans").jsonPath();
+       // jp.prettyPrint();
         // save the list into an object and assert the size
 
         List<Integer> allIds = jp.getList("id", Integer.class); // why not content.id
         List<String> allNames = jp.getList("name", String.class);
         List<Long> allPhones = jp.getList("phone",Long.class);
 
-        assertThat(allIds, hasSize(100));
-        assertThat(allNames,hasSize(100));
-        assertThat(allPhones, hasSize(100));
+        assertThat(allIds, hasSize(103));
+        assertThat(allNames,hasSize(103));
+        assertThat(allPhones, hasSize(103));
 
     }
 //Practice json path for all the requests we have done in Postman
