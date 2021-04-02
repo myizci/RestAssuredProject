@@ -16,8 +16,11 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static io.restassured.RestAssured.*;
 import static io.restassured.matcher.RestAssuredMatchers.*;
 import static org.hamcrest.Matchers.*;
+
+
 @DisplayName("Library App Simple Test")
 public class LibraryAppTest {
+
 
     @BeforeAll
     public static void init() {
@@ -78,7 +81,7 @@ public class LibraryAppTest {
                         .log().all()
                         .statusCode(200).
                 extract()
-                        .body().path("token");
+                        .body().path("token"); // this is a String
 
 
         given()
@@ -90,7 +93,8 @@ public class LibraryAppTest {
         then()
                 .statusCode(200)
                 .log().all()
-                .body("email" ,is(username));
+                .body("email" ,is(username))
+        ;
 
     }
 
@@ -114,15 +118,16 @@ public class LibraryAppTest {
 
         given()
                 .header("x-library-token",myToken).
+                //.contentType(ContentType.URLENC).
 
         when()
                 .get("/dashboard_stats").
         then()
                 .log().all()
                 .statusCode(200)
-                .body("book_count",is("2107"))
-                .body("borrowed_books",is("775"))
-                .body("users",is("8665"))
+                .body("book_count",is("2669"))
+                .body("borrowed_books",is("778"))
+                .body("users",is("8686"))
 
         ;
 

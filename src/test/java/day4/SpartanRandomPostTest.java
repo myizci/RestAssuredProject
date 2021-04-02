@@ -36,6 +36,7 @@ public class SpartanRandomPostTest extends SpartanNoAuthBaseTest {
                 .log().all()
                 .statusCode(201)
                 .body("data.name", is(randomRequestBodyMap.get("name")))
+                .body(("data.gender"),is(randomRequestBodyMap.get("gender")))
         ;
     }
 
