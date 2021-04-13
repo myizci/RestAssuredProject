@@ -47,6 +47,10 @@ public class Spartan {
 
     @Override
     public String toString() {
-        return super.toString();
+        return "Spartan{" +
+                "name='" + name + '\'' +
+                ", gender='" + gender + '\'' +
+                ", phone=" + phone +
+                '}';
     }
 }
