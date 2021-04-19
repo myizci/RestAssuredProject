@@ -19,7 +19,7 @@ public class dot {
     public static void init() {
 
         baseURI = "https://vpic.nhtsa.dot.gov/";
-        basePath = "/api/vehicles";
+        basePath = "/api/vehicles";//
     }
 
     @AfterAll

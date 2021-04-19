@@ -1,5 +1,6 @@
 package day11;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import pojo.Spartan;
@@ -20,16 +21,22 @@ public class SpartanPostSchemaTest extends SpartanWithAuthBaseTest {
     @Test
     public void testAdd1SpartanResponse(){
         Spartan bodyPOJO = SpartanUtil.getRandomSpartanPOJO();
-
+JsonPath jp=
         given()
                 .auth().basic("admin","admin")
                 .contentType(ContentType.JSON)
                 .body(bodyPOJO).
         when()
-                .post("/spartans").
-        then()
-                .statusCode(201)
-                .body(matchesJsonSchemaInClasspath("spartanPostJsonSchema.json"));
+                .post("/spartans").jsonPath().prettyPeek()
+        //then()
+            //    .statusCode(201)
+              //  .log().body()
+                //.body(matchesJsonSchemaInClasspath("spartanPostJsonSchema.json"))
+               // .body(matchesJsonSchema(new File("src/test/resources/spartanPostJsonSchema.json")))
+        ;
+
+int id= jp.getInt("data.id");
+        System.out.println("id = " + id);
     }
 
 
